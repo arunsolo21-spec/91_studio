@@ -1,0 +1,610 @@
+/* =========================================
+   1. GLOBAL RESET & FONTS
+   ========================================= */
+:root {
+    --primary-orange: #FF5E00; /* Vibrant Orange */
+    --black: #000000;
+    --white: #ffffff;
+    --glass-bg: rgba(255, 255, 255, 0.15);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --border-thickness: 3px;
+    --hard-shadow: 6px 6px 0px var(--black); /* The "Cool" Shadow */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Manrope', sans-serif;
+    background-color: var(--white);
+    color: var(--black);
+    overflow-x: hidden; /* Prevent horizontal scrollbars */
+}
+
+h1, h2, h3, .menu-list a {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* =========================================
+   2. HERO SECTION (VIDEO BACKGROUND)
+   ========================================= */
+#hero {
+    position: relative;
+    height: 100vh; /* Full Screen */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: var(--white);
+    border-bottom: var(--border-thickness) solid var(--black);
+}
+
+/* The Background Video */
+#bg-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -2;
+    object-fit: cover;
+    filter: grayscale(100%) contrast(1.2); /* Makes video Black & White for style */
+}
+
+/* Dark Overlay so text pops */
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* 50% Black overlay */
+    z-index: -1;
+}
+
+.hero-content {
+    text-align: center;
+    z-index: 1;
+    padding: 20px;
+}
+
+.main-title {
+    font-size: 8rem; /* Huge Text */
+    line-height: 0.9;
+    letter-spacing: -2px;
+    margin-bottom: 10px;
+}
+
+.outline-text {
+    /* Hollow text effect */
+    color: transparent;
+    -webkit-text-stroke: 3px var(--primary-orange);
+}
+
+.tagline {
+    font-size: 1.2rem;
+    font-family: 'Syne', sans-serif;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.hero-badges span {
+    display: inline-block;
+    background: var(--primary-orange);
+    color: var(--black);
+    padding: 5px 15px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin: 0 5px;
+    border: 2px solid var(--black);
+}
+
+/* Responsive Text for Mobile */
+@media (max-width: 768px) {
+    .main-title { font-size: 4rem; }
+}
+
+/* =========================================
+   3. GLASS NAVIGATION (BELOW HERO)
+   ========================================= */
+#main-nav {
+    position: sticky; /* Sticks to top when scrolling */
+    top: 20px; /* Floats slightly from top */
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+.menu-list {
+    display: flex;
+    gap: 15px;
+    padding: 15px 30px;
+    
+    /* GLASSMORPHISM EFFECT */
+    background: rgba(255, 255, 255, 0.2); /* See-through white */
+    backdrop-filter: blur(15px); /* Blurs content behind it */
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50px; /* Pill shape */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.menu-list a {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--black); /* Changed to black for visibility below hero */
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+    border-radius: 30px;
+}
+
+/* Hover Effect */
+.menu-list a:hover {
+    background: var(--primary-orange);
+    color: var(--black);
+}
+
+.btn-highlight {
+    background: var(--black);
+    color: var(--primary-orange) !important;
+}
+
+/* =========================================
+   4. THE ARTIST (OWNER SECTION)
+   ========================================= */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 20px;
+}
+
+.split-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.owner-image-wrapper {
+    position: relative;
+}
+
+.owner-photo {
+    width: 100%;
+    height: 500px;            /* Desktop visual height retained */
+    object-fit: cover;        /* desktop: artistic crop */
+    border: var(--border-thickness) solid var(--black);
+    box-shadow: var(--hard-shadow); /* The Cool Shadow */
+    filter: grayscale(100%);
+    transition: 0.3s;
+}
+
+/* Hover effect kept */
+.owner-photo:hover {
+    filter: grayscale(0%);
+    transform: translate(-3px, -3px);
+    box-shadow: 10px 10px 0px var(--primary-orange);
+}
+
+.floating-badge {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    background: var(--primary-orange);
+    color: var(--black);
+    padding: 15px 30px;
+    border: var(--border-thickness) solid var(--black);
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.owner-details h2 {
+    font-size: 4rem;
+    line-height: 1;
+    margin-bottom: 10px;
+}
+
+.highlight-orange {
+    color: var(--primary-orange);
+    font-style: italic;
+}
+
+.degrees {
+    font-size: 1rem;
+    color: #666;
+    vertical-align: middle;
+}
+
+.role {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--primary-orange);
+    display: inline-block;
+}
+
+.bio {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.contact-grid {
+    display: flex;
+    gap: 20px;
+}
+
+.info-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.info-box i {
+    color: var(--primary-orange);
+}
+
+/* =========================================
+   5. INFINITE MOVING GALLERY (SCROLL)
+   ========================================= */
+#gallery {
+    padding: 50px 0;
+    background: var(--black); /* Contrast section */
+    overflow: hidden;
+    border-top: var(--border-thickness) solid var(--black);
+    border-bottom: var(--border-thickness) solid var(--black);
+}
+
+.gallery-title {
+    text-align: center;
+    color: var(--white);
+    margin-bottom: 30px;
+}
+
+.gallery-title h2 {
+    font-size: 3rem;
+}
+
+.stroke {
+    -webkit-text-stroke: 1px var(--primary-orange);
+    color: transparent;
+}
+
+.scrolling-wrapper {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.gallery-track {
+    display: inline-flex;
+    /* Animation definition */
+    animation: scroll 20s linear infinite; 
+}
+
+.gallery-track:hover {
+    animation-play-state: paused; /* Stops on hover/touch */
+}
+
+.gallery-track img {
+    height: 300px; /* Fixed height */
+    width: 400px;  /* Fixed width */
+    object-fit: cover;
+    margin-right: 20px;
+    border: 2px solid var(--white);
+    transition: 0.3s;
+    /* Make them look like film strips */
+    filter: sepia(0.5); 
+}
+
+.gallery-track img:hover {
+    filter: none;
+    transform: scale(1.05);
+    border-color: var(--primary-orange);
+}
+
+/* The Magic Animation Keyframes */
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } /* Moves half the width (since we duplicated images) */
+}
+
+/* =========================================
+   6. SERVICES GRID (BENTO STYLE)
+   ========================================= */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.service-box {
+    border: var(--border-thickness) solid var(--black);
+    padding: 40px 20px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5rem;
+    text-align: center;
+    transition: 0.3s;
+    background: var(--white);
+    cursor: crosshair;
+}
+
+.service-box:hover {
+    background: var(--primary-orange);
+    color: var(--white);
+    box-shadow: var(--hard-shadow);
+    transform: translate(-5px, -5px);
+}
+
+/* =========================================
+   7. PACKAGES (CARDS)
+   ========================================= */
+.pricing-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.price-card {
+    border: var(--border-thickness) solid var(--black);
+    width: 350px;
+    background: var(--white);
+    position: relative;
+    transition: 0.3s;
+}
+
+.price-card:hover {
+    box-shadow: var(--hard-shadow);
+    transform: translateY(-10px);
+}
+
+.card-header {
+    background: var(--black);
+    color: var(--primary-orange);
+    padding: 30px;
+    text-align: center;
+    border-bottom: var(--border-thickness) solid var(--black);
+}
+
+.card-header h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--white);
+}
+
+/* Featured Card Style (Diamond) */
+.featured {
+    transform: scale(1.05);
+    z-index: 2;
+    border-color: var(--primary-orange);
+}
+.featured .card-header {
+    background: var(--primary-orange);
+    color: var(--black);
+}
+.featured .price { color: var(--black); }
+
+.card-body {
+    padding: 30px;
+}
+
+.card-body ul {
+    margin-bottom: 30px;
+}
+
+.card-body li {
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.btn-book {
+    width: 100%;
+    padding: 15px;
+    background: transparent;
+    border: 2px solid var(--black);
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-book:hover {
+    background: var(--black);
+    color: var(--white);
+}
+
+/* =========================================
+   8. REVIEWS
+   ========================================= */
+.review-slider {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding-bottom: 20px;
+    /* Hide scrollbar */
+    scrollbar-width: none; 
+}
+
+.review-card {
+    min-width: 300px;
+    background: #f9f9f9;
+    border: 1px solid var(--black);
+    padding: 30px;
+    border-left: 10px solid var(--primary-orange);
+}
+
+.stars {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.review-text {
+    font-style: italic;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+.client-name {
+    font-weight: bold;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+}
+
+/* =========================================
+   9. FOOTER
+   ========================================= */
+footer {
+    background: var(--black);
+    color: var(--white);
+    padding: 60px 20px 20px;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto 40px;
+    gap: 40px;
+}
+
+.footer-section h3 {
+    font-size: 2rem;
+    color: var(--primary-orange);
+    margin-bottom: 10px;
+}
+
+.footer-section h4 {
+    color: var(--primary-orange);
+    margin-bottom: 15px;
+}
+
+.footer-section p {
+    color: #ccc;
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.social-links a {
+    color: var(--white);
+    font-size: 1.5rem;
+    margin-right: 15px;
+    transition: 0.3s;
+}
+
+.social-links a:hover {
+    color: var(--primary-orange);
+}
+
+.copyright {
+    text-align: center;
+    border-top: 1px solid #333;
+    padding-top: 20px;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+/* =========================================
+   FINAL MOBILE OVERRIDES (put at the end)
+   - Makes nav flat/fixed
+   - Shows full owner image on small screens
+   ========================================= */
+@media (max-width: 768px) {
+
+    /* NAV: fixed, flat, full-width */
+    #main-nav {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #ffffff !important;
+        backdrop-filter: none !important;
+        z-index: 9999 !important;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.15) !important;
+        border-radius: 0 !important;
+    }
+
+    #main-nav .menu-list {
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 10px 12px !important;
+        margin: 0 !important;
+        background: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        gap: 0 !important;
+    }
+
+    #main-nav .menu-list a {
+        font-size: 12px !important;
+        padding: 6px 4px !important;
+        background: none !important;
+        white-space: nowrap !important;
+    }
+
+    .btn-highlight {
+        padding: 6px 10px !important;
+        border-radius: 4px !important;
+    }
+
+    /* push content down so navbar doesn't overlap hero */
+    #hero {
+        padding-top: 70px !important;
+    }
+
+    /* Make layout stack and show full owner image */
+    .split-layout {
+        grid-template-columns: 1fr !important;
+        gap: 30px !important;
+        text-align: center !important;
+    }
+
+    .owner-photo {
+        width: 100% !important;
+        height: auto !important;       /* full image — no cropping */
+        object-fit: contain !important;
+        box-shadow: none !important;
+    }
+
+    .floating-badge {
+        position: static !important;
+        margin-top: 10px !important;
+        display: inline-block !important;
+    }
+}
